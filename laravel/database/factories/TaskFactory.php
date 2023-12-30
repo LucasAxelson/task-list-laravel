@@ -17,7 +17,7 @@ class TaskFactory extends Factory
             "title" => $this->faker->sentence(1),
             "description" => $this->faker->sentence(3),
             "long_description" => $this->faker->paragraph(2),
-            "completed" => $this->faker->boolean(100),
+            "completed" => $this->faker->boolean(50),
         ];
     }
 }

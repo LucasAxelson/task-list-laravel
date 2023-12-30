@@ -8,7 +8,7 @@
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
-    <h1>@yield('title')</h1>
+    <h1 style="text-align: center;">@yield('title')</h1>
 
     <section style="border: 1px solid black; margin: 2rem; padding: 1rem;">
         @yield('content')
