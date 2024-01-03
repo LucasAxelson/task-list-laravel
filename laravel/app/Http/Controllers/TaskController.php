@@ -21,7 +21,7 @@ class TaskController extends Controller
      */
     public function create()
     {
-        return view('create');
+        return view('tasks.create');
     }
 
     /**
@@ -36,7 +36,7 @@ class TaskController extends Controller
            ]);
           
            Task::create($data);
-           return redirect(route('tasks.index'));
+           return redirect(route('tasks.index'))->with('success','Task created!');
     }
 
     /**
@@ -46,37 +46,42 @@ class TaskController extends Controller
      */
     public function show(string $id)
     {
-        return view ('view', [ 'task' => Task::findOrFail($id) ]);
+        return view ('tasks.view', [ 'task' => Task::findOrFail($id) ]);
     }
 
     /**
      * Show the form for editing the specified resource.
-     *
+     * 
      * @param  \App\Models\Task  $task
-     * @return \Illuminate\Http\Response
      */
-    public function edit(Task $task)
+    public function edit( string $id)
     {
-        //
+        return view('tasks.edit', [ 'task' => Task::findOrFail($id) ]);
     }
-
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateTaskRequest  $request
      * @param  \App\Models\Task  $task
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Request
      */
-    public function update(Request $request, Task $task)
+    public function update(Task $task, Request $request)
     {
-        //
+        $data = $request->validate([
+            'title' => 'min: 1 | string | max: 80',
+            'description' => 'min:1 | string | max: 255',
+            'long_description' => 'string | max: 255',
+            'completed' => 'boolean'
+           ]);
+          
+           $task->update($data);
+
+           return redirect(route('tasks.index'))->with('success','Task edited!');
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Task  $task
-     * @return \Illuminate\Http\Response
      */
     public function destroy(Task $task)
     {

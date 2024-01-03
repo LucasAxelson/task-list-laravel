@@ -19,10 +19,14 @@ use App\Http\Controllers\TaskController;
 
 Route::get('/', [TaskController::class,'index']);
 
-Route::get('tasks/', [TaskController::class, "index"])->name('tasks.index');
+Route::get('/tasks', [TaskController::class, "index"])->name('tasks.index');
 
-Route::get('tasks/{id}', [TaskController::class, "show"])->name('tasks.show');
+Route::get('/tasks/{id}', [TaskController::class, "show"])->name('tasks.show');
 
-Route::get('create', [TaskController::class, "create"])->name('tasks.create');
+Route::get('/tasks/0/create', [TaskController::class, "create"])->name('tasks.create');
 
-Route::post('tasks/', [TaskController::class, "store"])->name('tasks.store');
+Route::post('/tasks', [TaskController::class, "store"])->name('tasks.store');
+
+Route::get('/tasks/{id}/edit', [TaskController::class, "edit"])->name('tasks.edit');
+
+Route::put('/tasks/{id}/update', [TaskController::class, "update"])->name('tasks.update');

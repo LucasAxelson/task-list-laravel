@@ -2,10 +2,17 @@
 
 @section('title', "Task List!")
 
+
 @section('content')
-    
+
+@if (session()->has('success'))
+    <div>{{ session('success') }}</div>
+@endif
+
 @forelse($tasks as $task)
-<p><a href="{{ route('tasks.show', ['id' => $task->id]) }}">{{$task->title}}</a></p>
+
+
+    <p><a href="{{ route('tasks.show', ['id' => $task->id]) }}">{{$task->title}}</a></p>
     @empty
     
     <div>
@@ -16,4 +23,4 @@
     
     <p style="text-align: right;"><a href="{{ route('tasks.create') }}">Create</a></p>
     
-    @endsection
+@endsection
