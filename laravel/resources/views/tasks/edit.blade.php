@@ -52,7 +52,7 @@
 
 <div class="input-div">
     <label class="div-elements" for="completed">Completed?</label>
-    <input type="checkbox" name="completed" id="completed" value="">
+    <input type="checkbox" name="completed" id="completed" value="1">
     @error('completed')
     <p class="div-elements error-message">{{ $message }}</p>
     @enderror

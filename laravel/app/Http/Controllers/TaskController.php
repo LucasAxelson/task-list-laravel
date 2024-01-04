@@ -64,16 +64,19 @@ class TaskController extends Controller
      * @param  \App\Models\Task  $task
      * @return \Illuminate\Http\Request
      */
-    public function update(Task $task, Request $request)
+    public function update($id, Task $task, Request $request)
     {
         $data = $request->validate([
             'title' => 'min: 1 | string | max: 80',
             'description' => 'min:1 | string | max: 255',
             'long_description' => 'string | max: 255',
-            'completed' => 'boolean'
            ]);
           
-           $task->update($data);
+           $task = Task::findOrFail($id);
+           $task->title = $data['title'];
+           $task->description = $data['description'];
+           $task->long_description = $data['long_description'];
+           $task->save();
 
            return redirect(route('tasks.index'))->with('success','Task edited!');
     }
